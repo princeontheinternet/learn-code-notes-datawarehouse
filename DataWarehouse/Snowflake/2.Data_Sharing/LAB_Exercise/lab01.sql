@@ -1,0 +1,19 @@
+
+// Inbound Share
+
+//LAB 1 - EXERCISE 1 -----------------------------------;
+
+--Attempt to make changes to the SNOWFLAKE database.
+--the SNOWFLAKE database is often referred to as "The Account Usage Share"
+
+DROP DATABASE snowflake_sample_data;
+
+CREATE DATABASE "THAT_COOL_SAMPLE_STUFF" 
+FROM SHARE SFC_SAMPLES."SAMPLE_DATA";
+GRANT IMPORTED PRIVILEGES ON DATABASE "THAT_COOL_SAMPLE_STUFF" TO ROLE "SYSADMIN";
+
+ALTER DATABASE THAT_COOL_SAMPLE_STUFF
+RENAME TO THAT_REALLY_COOL_SAMPLE_STUFF;
+
+ALTER DATABASE THAT_REALLY_COOL_SAMPLE_STUFF
+SET COMMENT = 'Holds TPC Sample data for speed testing';

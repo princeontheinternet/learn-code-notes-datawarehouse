@@ -1,0 +1,31 @@
+/* Congratulations on your new reader account! The following template provides steps for configuring your reader account so that it's consumer ready. Learn more at
+https://docs.snowflake.net/manuals/LIMITEDACCESS/data-sharing-reader-config.html#task-1-log-into-the-reader-account-as-the-account-administrator */
+
+/* Task 1: Make sure you're logged in as ACCOUNTADMIN. Don't forget to also set the role for your worksheet context as ACCOUNTADMIN.*/
+use role ACCOUNTADMIN;
+
+/* Task 2: Create Custom Roles (Optional) */
+create role myrole;
+
+/* Task 3: Create Users */
+create user user1 password='abc123' default_role = myrole must_change_password = true;
+
+/* Task 4: Create Virtual Warehouses (Optional) */
+create or replace warehouse my_wh warehouse_size=large initially_suspended=true;
+
+/* Task 5: Create Resource Monitors (Optional) */
+create or replace resource monitor limiter with credit_quota=5000
+   triggers on 75 percent do notify
+            on 100 percent do suspend
+            on 110 percent do suspend_immediate;
+
+/* Task 6: Create a Database from Each Share Shared with the Account */
+create database shared_db1 from share ab12345.share1;
+
+/* Task 7: Grant Required Virtual Warehouse and Database Privileges to Roles */
+grant usage on virtual warehouse testing_vw to role public;
+grant imported privileges on database shared_db1 to role public;
+grant imported privileges on database shared_db2 to role public;
+
+/* Task 8: Invite Users to Log in and Reset Their Passwords */
+alter user ra_user1 reset password;

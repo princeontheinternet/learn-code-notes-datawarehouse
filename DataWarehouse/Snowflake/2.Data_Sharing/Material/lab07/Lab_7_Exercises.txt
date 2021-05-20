@@ -1,0 +1,118 @@
+//LAB 7 - EXERCISE 1--------------------------------------------------------
+
+--Set Worksheet Context
+USE DATABASE INTL_DB;
+USE WAREHOUSE INTL_WH;
+USE SCHEMA PUBLIC;
+
+--Create a table to hold the security mapping
+CREATE OR REPLACE TABLE CUSTOMER_COUNTRY_SECURITY_MAPPING
+(
+ CTY_CODE VARCHAR(3)
+,CUSTOMER_ACCOUNT VARCHAR(10)
+);
+
+--Load the security mapping table with some rows for your Trial
+--and some rows for your Reader Account
+INSERT INTO CUSTOMER_COUNTRY_SECURITY_MAPPING
+Values 
+('CAN','FU12106'), --change FU12106 to YOUR Reader Account
+('USA','FU12106'),
+('DZA','AS78317'), --change AS78317 to YOUR Trial Account
+('BEL','AS78317');
+
+--Only use the truncate statement if you need to remove
+--the rows and reload them
+--TRUNCATE TABLE CUSTOMER_COUNTRY_SECURITY_MAPPING;
+
+--Check your table to see if you loaded the rows correctly
+SELECT *
+FROM CUSTOMER_COUNTRY_SECURITY_MAPPING;
+--Set Worksheet Context
+USE DATABASE INTL_DB;
+USE WAREHOUSE INTL_WH;
+USE SCHEMA PUBLIC;
+
+--Create a table to hold the security mapping
+CREATE OR REPLACE TABLE CUSTOMER_COUNTRY_SECURITY_MAPPING
+(
+ CTY_CODE VARCHAR(3)
+,CUSTOMER_ACCOUNT VARCHAR(10)
+);
+
+--Load the security mapping table with some rows for your Trial
+--and some rows for your Reader Account
+INSERT INTO CUSTOMER_COUNTRY_SECURITY_MAPPING
+Values 
+('CAN','FU12106'), --change FU12106 to YOUR Reader Account
+('USA','FU12106'),
+('DZA','AS78317'), --change AS78317 to YOUR Trial Account
+('BEL','AS78317');
+
+
+--Only use the truncate statement if you need to remove rows and reload 
+--TRUNCATE TABLE CUSTOMER_COUNTRY_SECURITY_MAPPING;
+
+--Check your table to see if you loaded the rows correctly
+SELECT * FROM CUSTOMER_COUNTRY_SECURITY_MAPPING;
+
+//***** End Exercise 1 ************************************************************
+
+
+//LAB 7 - EXERCISE 2 --------------------------------------------------------------
+
+--Remind yourself what the Simple Currency view data looks like
+SELECT cty_code, cur_code
+FROM "INTL_DB"."PUBLIC"."SIMPLE_CURRENCY";
+
+--The view with a WHERE clause that restricts data to 
+--only the rows Lottie and ACME want to see from OSIRIS
+SELECT cty_code, cur_code
+FROM "INTL_DB"."PUBLIC"."SIMPLE_CURRENCY"
+WHERE cty_code in ('CAN','USA');
+
+-- Join the Simple Currency View with your new mapping table
+-- the join restricts the data to just those that appear in 
+-- the mapping table
+SELECT sc.cty_code, cur_code, customer_account 
+FROM "INTL_DB"."PUBLIC"."SIMPLE_CURRENCY" sc
+JOIN "INTL_DB"."PUBLIC"."CUSTOMER_COUNTRY_SECURITY_MAPPING" sm
+ON sc.cty_code = sm.cty_code;
+
+--A statement that uses both a join and a where clause
+--be sure to change FU12106 so that it uses YOUR reader account
+SELECT sc.cty_code, cur_code, customer_account 
+FROM "INTL_DB"."PUBLIC"."SIMPLE_CURRENCY" sc
+JOIN "INTL_DB"."PUBLIC"."CUSTOMER_COUNTRY_SECURITY_MAPPING" sm
+ON sc.cty_code = sm.cty_code
+WHERE customer_account='FU12106';
+
+//***** End Exercise 2 ************************************************************
+
+
+//LAB 7 - EXERCISE 3 --------------------------------------------------------------
+-- Create a new schema for the new standard listing
+CREATE SCHEMA INTL_DB.STD;
+
+-- Use an ALTER statement to move the ISO table from the
+-- Public schema to our new STD schema
+ALTER TABLE "INTL_DB"."PUBLIC"."INT_STDS_ORG_3661"
+RENAME TO "INTL_DB"."STD"."INT_STDS_ORG_3661";
+
+--Create another new schema for the new personalized listing
+CREATE SCHEMA INTL_DB.PRZLD;
+
+USE SCHEMA INTL_DB.PRZLD;
+
+-- Create the secure view that you'll use 
+-- when you create an outbound share 
+-- for WDE's Personalized Listing
+CREATE SECURE VIEW PRZLD.CUSTOMER_CURRENCY
+AS
+SELECT sc.cty_code, cur_code, customer_account 
+FROM "INTL_DB"."PUBLIC"."SIMPLE_CURRENCY" sc
+JOIN "INTL_DB"."PUBLIC"."CUSTOMER_COUNTRY_SECURITY_MAPPING" sm
+ON sc.cty_code = sm.cty_code
+WHERE customer_account=CURRENT_ACCOUNT();
+
+//***** End Exercise 3 ************************************************************
