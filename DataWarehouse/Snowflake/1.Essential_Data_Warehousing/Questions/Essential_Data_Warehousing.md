@@ -112,6 +112,20 @@ Q. What is a **CONTEXT**?
     CURRENT_ACCOUNT(),
     CURRENT_REGION();
 
+    //Displaying all
+    
+    SHOW ROLES;
+    SHOW WAREHOUSES;
+    SHOW DATABASES;
+    SHOW SCHEMAS;
+    SHOW FUNCTIONS;
+    SHOW PROCEDURES;
+    SHOW USERS;
+    SHOW TABLES;
+    SHOW FILE FORMATS;
+    SHOW STAGES;
+
+
 ---
 <br>
 
@@ -312,3 +326,8 @@ Q. **UPPER** function in Snowflake.
 
 ---
 <br>
+
+
+
+NOTE:
+- Snowflake automatically converts unquoted, case-insensitive identifiers to uppercase internally, so an unquoted object name appears in upper case.
