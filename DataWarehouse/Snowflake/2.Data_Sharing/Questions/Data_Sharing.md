@@ -148,8 +148,17 @@ Q. How to extract month from a column?
     --let column be column1
     SELECT MONTH(column1) from table where MONTH(column1) = 1;      --1 is January
     
+    --OR
+    DATE_PART(MONTH, "column1")
+    DATE_PART(year,"column1")
+    DATE_PART(week,"column1")
+    DATE_PART(day,"column1")
+
+
     --extract 60 days from current date
     SELECT DATEADD(day, -60, CURRENT_DATE());               --returns date 2021-03-18 on 2021-05-17
+
+    
 
  ---
 <br>
