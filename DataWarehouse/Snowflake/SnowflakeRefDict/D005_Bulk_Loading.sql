@@ -31,7 +31,7 @@ CREATE OR REPLACE STAGE
 
 
 // list the files in stages
-LIST t1.$1, t2.$2 from @CITIBIKE_TRIPS as t;
+LIST t.$1, t.$2 from @CITIBIKE_TRIPS as t;
 
 
 // Creating File Format

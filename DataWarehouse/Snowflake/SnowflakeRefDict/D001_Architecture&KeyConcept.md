@@ -19,6 +19,7 @@
 <br>
 
 _**Snowflake Architecture**_
+
 ![img_1.png](img_1.png)
 
 - Snowflake is a hybrid of shared disk and shared nothing architecture.
