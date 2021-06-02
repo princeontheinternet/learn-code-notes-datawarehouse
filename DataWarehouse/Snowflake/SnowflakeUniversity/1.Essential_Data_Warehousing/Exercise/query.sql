@@ -8,7 +8,7 @@ CREATE TABLE assing(col1 variant);
 
 CREATE FILE FORMAT my_json_file_format
 TYPE = 'JSON'
-STRIP_OUTER_ELEMENT = TRUE;
+STRIP_OUTER_ARRAY = TRUE;
 
 
 //Load the table using WebUI
