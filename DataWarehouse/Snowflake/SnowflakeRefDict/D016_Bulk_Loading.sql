@@ -35,6 +35,13 @@ LIST t.$1, t.$2 from @CITIBIKE_TRIPS as t;
 
 
 // Creating File Format
+
+-- *********************************************************************************************
+-- Types of File Formats available:
+-- TYPE =  CSV | JSON | AVRO | ORC | PARQUET | XML 
+-- File Format can be a part of Stages, Copy into cmd and Create table stmt.
+-- *********************************************************************************************
+
 CREATE OR REPLACE FILE FORMAT
   {user}_CITIBIKE.PUBLIC.CSV
   TYPE = 'CSV'
