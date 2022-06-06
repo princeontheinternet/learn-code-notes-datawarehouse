@@ -42,7 +42,7 @@ _**Traditional Vs Snowflake Architecture**_
 - Cloud Services  
 - Cloud Agnostic Layer
 
-![layers_of_snowflake.png](img/layers_of_snowflake.PNG)
+![layers_of_snowflake.png](img/layers_of_snowflake.png)
 
 <br>
 
