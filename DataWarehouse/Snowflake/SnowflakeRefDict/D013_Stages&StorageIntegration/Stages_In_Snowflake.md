@@ -16,4 +16,8 @@
     from @stage_name;
     ```
 
+_**Notes:**_
+
+- For CSV file format you will have to use $1, $2 for columns in select statement, but for JSON and PARQUET file format you can directly use select * from @stage.
+
 ---
