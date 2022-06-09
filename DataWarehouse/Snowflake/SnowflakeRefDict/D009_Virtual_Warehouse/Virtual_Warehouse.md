@@ -58,6 +58,8 @@ _**Note :**_
   
 - In the **WebUI** the default size of the WH is **X-Large**, but using **SQL Command** if you don't specify the size of the warehouse then by default it takes **X-Small**.
 
+- Compute_WH (X-Small) is the default warehouse given by snowflake.
+
 - There are two **scaling policy** in Enterprise Edition or Multi-Cluster Warehousing
   1. Standard
   2. Economy
@@ -90,10 +92,13 @@ _**Note :**_
 ## Cached Memory
 
 - The size of cached is determined by no. of servers in WH.
-- The cache is dropped when the WH is suspended.
+- The cache is **dropped** when the WH is suspended.
   - So, when restarted the WH may be slower.
 - If your o/p of the query is cached & table is not affected then the result will come from the cached.
   - This can save credit.
+- Results are cached for 24 hrs or until underlying data has changed.
+- Ensure **similar queries go on the same warehouse** to maximize Caching.
+  - Team of Data Scientist run similar queries, so they should all use the same warehouse.
 
 ---
 
