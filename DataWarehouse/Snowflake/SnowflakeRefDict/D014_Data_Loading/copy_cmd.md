@@ -149,3 +149,18 @@ file_format = (type = CSV, field_delimeter = ',' skip_header = 1);
     select rejected_record, * from table(validate(table_name, job_id => '_last'));
     ```
 
+---
+
+- **load history**
+
+  - You can check the load history using the below tables.
+
+    ```sql
+        -- within the last 14 days
+    select * from information_schema.load_history;
+
+    -- within the last 365 days
+    select * from snowflake.account_usage.load_history; 
+    ```
+
+---
