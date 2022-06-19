@@ -64,7 +64,6 @@ _**Note :**_
   1. Standard
   2. Economy
 
-
       1.Scale Out: Standard Policy
       ![scaling_out_std.png](img/scaling_out_std.png)
 
@@ -111,3 +110,20 @@ _**Note :**_
 ![Capture1.png](img/Capture1.PNG)
 
 ---
+
+### MONITORING
+
+```sql
+
+SELECT * FROM SNOWFLAKE.ACCOUNT_USAGE.WAREHOUSE_METERING_HISTORY;
+
+SELECT 
+  WAREHOUSE_NAME,
+  SUM(CREDITS_USED)
+ FROM SNOWFLAKE.ACCOUNT_USAGE.WAREHOUSE_METERING_HISTORY
+ GROUP BY WAREHOUSE_NAME;
+
+```
+
+---
+
