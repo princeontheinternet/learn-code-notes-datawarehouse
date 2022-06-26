@@ -33,6 +33,9 @@ use warehouse sf_tuts_wh;
 
 
 //Staging Files in table stage as % is used
+
+-- ******************* PUT/GET Commands do not run from the UI and only run through CLI. **********************************************
+
 put file:///tmp/employees0*.csv @sf_tuts.public.%emp_basic;
 
 
