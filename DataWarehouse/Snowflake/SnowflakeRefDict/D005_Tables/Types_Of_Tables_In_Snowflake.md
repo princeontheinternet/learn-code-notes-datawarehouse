@@ -38,7 +38,8 @@ _**Note :**_
 
 - Also it's advisable to keep the retention_period of these tables to 0 to save time travel cost.
 
-    ```(As we can directly get the raw data from source and do not need to make use of time travel)
+    ```
+    As we can directly get the raw data from source and do not need to make use of time travel
     ```
 
 - In case of large tables also we can use transient table and 1 day time travel to save fail safe cost.
